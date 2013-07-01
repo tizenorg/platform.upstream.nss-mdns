@@ -8,6 +8,7 @@ Group:          Productivity/Networking/DNS/Utilities
 Source:         %{name}-%{version}.tar.bz2
 Source1:        nss-mdns-config
 Source2:        baselibs.conf
+Source1001: 	nss-mdns.manifest
 
 %description
 nss-mdns is a plug-in for the GNU Name Service Switch (NSS)
@@ -25,6 +26,7 @@ hostnames and addresses and makes use of its superior record cacheing.
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 %build
 %configure --libdir=/%{_lib}
@@ -47,6 +49,7 @@ fi
 %postun -p /sbin/ldconfig
 
 %files
+%manifest %{name}.manifest
 %defattr(-,root,root)
 %doc LICENSE
 %{_sbindir}/nss-mdns-config
